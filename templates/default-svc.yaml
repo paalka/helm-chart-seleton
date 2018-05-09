@@ -1,0 +1,16 @@
+# Expose the default deployment to the namespace
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: {{ template "chartName" . }}
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+spec:
+  ports:
+  - port: # TODO: add a port to use when exposing the service to the namespace
+    targetPort: # TODO: add the port used by the container this service is exposing
+    protocol: TCP
+  selector:
+    app: {{ template "fullname" . }} # TODO: change this if you want to expose another app

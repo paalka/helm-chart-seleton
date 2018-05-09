@@ -1,0 +1,10 @@
+# TODO: Add the values that is to be filled in by the user here.
+ingress:
+  host: "local.example.com"
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 1
+    memory: 2Gi

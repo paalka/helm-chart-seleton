@@ -1,0 +1,28 @@
+# Expose a service to the outside world
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: {{ template "chartName" . }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme-staging: "true"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+spec:
+  tls:
+    - secretName: {{ template "fullname" . }}-tls
+      hosts:
+         - {{ .Values.ingress.host }}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: / # TODO (optional): add a path here, if relevant.
+            backend:
+              serviceName: {{ template "fullname" . }}
+              servicePort: # TODO: add the port of the service here

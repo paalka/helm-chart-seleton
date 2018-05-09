@@ -1,0 +1,9 @@
+apiVersion: v1
+description: # TODO: Write something that describes what the chart does
+name: # TODO: You chart name here
+version: 1.0.0
+maintainers:
+  - name: # TODO: Your name here
+    email: # TODO: Your email address here
+home: # TODO: Add a link to the site where this chart is hosted
+icon: # TODO: Add a link to a icon to describes this chart

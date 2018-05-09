@@ -1,0 +1,21 @@
+# Ensure that the service and ingress is allowed to speak with the main ingress
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: {{ template "chartName" . }}
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ template "fullname" . }}
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            name: kube-ingress
+      ports:
+        - protocol: TCP
+          port: # TODO: add the port which the service is using
